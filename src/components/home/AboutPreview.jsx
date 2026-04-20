@@ -64,10 +64,12 @@ const AboutPreview = () => (
 
           <div className="space-y-6 text-lg text-stone-600 font-light leading-relaxed mb-12 max-w-xl">
             <p>
-              Founded in 2021, WNF  Design Studio has been at the forefront of architectural innovation, blending timeless design principles with contemporary aesthetics.
+              2007, 20th Floor, Wings Business Bay<br />
+              Nr. ITC Fortune Hotel, 150 Feet Ring Road<br />
+              Rajkot, Gujarat - 360004
             </p>
             <p>
-              Our multidisciplinary team of architects, interior designers, and project managers work collaboratively to deliver exceptional spaces that exceed expectations. Every project is a unique journey, guided by our commitment to sustainability, functionality, and aesthetic excellence.
+              info@wnfdesignstudio.com,  +91 8530070800
             </p>
           </div>
         </motion.div>

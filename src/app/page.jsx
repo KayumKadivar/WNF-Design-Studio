@@ -7,11 +7,27 @@ import FeaturedProjects from "@/components/home/FeaturedProjects";
 
 // 
 export const metadata = {
-  title: "Best Interior Designer in Rajkot | Architecture & Interior Design | WNF Design Studio",
+  title: "Best Interior & Architect Designer in Rajkot | WNF Design Studio",
   description:
-    "WNF Design Studio is Rajkot's top interior design & architecture firm. Founded in 2021, we design luxury homes, offices, bungalows & commercial spaces across Rajkot, Gujarat. Get free consultation!",
+    "WNF Design Studio – Rajkot's premier interior designer and architect. We design high-end luxury homes, corporate offices, and exhibition stalls. Book a free consultation today.",
   alternates: {
     canonical: "https://wnfdesignstudio.com",
+  },
+  openGraph: {
+    title: "Best Interior Designer in Rajkot | WNF Design Studio",
+    description:
+      "WNF Design Studio – Rajkot's premier interior designer and architect. We design high-end luxury homes, corporate offices, and exhibition stalls. Book a free consultation today.",
+    url: "https://wnfdesignstudio.com",
+    type: "website",
+    locale: "en_IN",
+    images: ["/assets/og/home-banner.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best Interior Designer in Rajkot | WNF Design Studio",
+    description:
+      "WNF Design Studio – Rajkot's premier interior designer and architect. We design high-end luxury homes, corporate offices, and exhibition stalls. Book a free consultation today.",
+    images: ["/assets/og/home-banner.jpg"],
   },
 };
 
@@ -21,7 +37,7 @@ function SchemaMarkup() {
     "@type": ["LocalBusiness", "InteriorDesigner", "Architect"],
     "@id": "https://wnfdesignstudio.com/#organization",
     name: "WNF Design Studio",
-    alternateName: "Studio WnF",
+    alternateName: "WNF Design Studio",
     description:
       "WNF Design Studio is a leading architecture and interior design firm based in Rajkot, Gujarat, India. We specialize in residential, commercial, and renovation projects.",
     url: "https://wnfdesignstudio.com",
@@ -116,7 +132,7 @@ export default function HomePage() {
   return (
     <PageIntroWrapper type="home">
       <SchemaMarkup />
-      
+
       <HeroSlider />
       <AboutPreview />
       <FeaturedProjects />

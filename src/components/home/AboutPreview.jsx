@@ -66,10 +66,8 @@ const AboutPreview = () => (
             <p>
               2007, 20th Floor, Wings Business Bay<br />
               Nr. ITC Fortune Hotel, 150 Feet Ring Road<br />
-              Rajkot, Gujarat - 360004
-            </p>
-            <p>
-              info@wnfdesignstudio.com,  +91 8530070800
+              Rajkot, Gujarat - 360004<br />
+              info@wnfdesignstudio.com, +91 8530070800
             </p>
           </div>
         </motion.div>

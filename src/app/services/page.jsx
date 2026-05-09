@@ -5,10 +5,10 @@ import { Building2, Palette, Home, Wrench, Lightbulb, Users, ArrowRight, ArrowUp
 import PageIntroWrapper from "@/components/shared/PageIntroWrapper";
 
 const services = [
-  { icon: Building2, title: "Architecture", description: "From concept to completion, we design buildings that stand the test of time while pushing creative boundaries.", features: ["Master Planning", "Building Design", "3D Visualization", "Construction Documents"] },
-  { icon: Palette, title: "Interior Design", description: "Creating cohesive interior environments that reflect your personality and enhance your lifestyle.", features: ["Space Planning", "Material Selection", "Custom Furniture", "Color Consultation"] },
-  { icon: Home, title: "Residential", description: "Bespoke homes designed around your unique needs, bringing together comfort and sophistication.", features: ["Custom Homes", "Renovations", "Additions", "Landscape Integration"] },
-  { icon: Wrench, title: "Renovation", description: "Breathing new life into existing spaces with thoughtful redesign and modern updates.", features: ["Historic Restoration", "Modern Updates", "Structural Changes", "Energy Efficiency"] },
+  { icon: Building2, title: "Architecture Design Services", description: "From concept to completion, we design buildings that stand the test of time while pushing creative boundaries.", features: ["Master Planning", "Building Design", "3D Visualization", "Construction Documents"] },
+  { icon: Palette, title: "Commercial Interior Design - Offices & Retail", description: "Creating cohesive commercial interior environments that reflect your brand and improve daily workflow.", features: ["Space Planning", "Material Selection", "Custom Furniture", "Color Consultation"] },
+  { icon: Home, title: "Residential Interior Design - Homes & Bungalows", description: "Bespoke homes designed around your unique needs, bringing together comfort and sophistication.", features: ["Custom Homes", "Renovations", "Additions", "Landscape Integration"] },
+  { icon: Wrench, title: "Renovation & Restoration Services", description: "Breathing new life into existing spaces with thoughtful redesign and modern updates.", features: ["Historic Restoration", "Modern Updates", "Structural Changes", "Energy Efficiency"] },
   { icon: Lightbulb, title: "Consulting", description: "Expert guidance on design strategy, feasibility studies, and project planning.", features: ["Feasibility Studies", "Code Compliance", "Sustainability", "Budget Planning"] },
   { icon: Users, title: "Project Management", description: "End-to-end project oversight ensuring quality delivery on time and within budget.", features: ["Contractor Coordination", "Timeline Management", "Quality Control", "Budget Oversight"] },
 ];
@@ -20,9 +20,61 @@ const process = [
   { step: "04", title: "Execution", description: "Managing the construction process to ensure the design vision becomes reality." },
 ];
 
+function SchemaMarkup() {
+  const servicesSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "name": "Architecture Design Services",
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "WNF Design Studio"
+        },
+        "description": "Master planning, structural design and 3D visualization in Rajkot."
+      },
+      {
+        "@type": "Service",
+        "name": "Commercial Interior Design",
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "WNF Design Studio"
+        },
+        "description": "Bespoke corporate office & retail space interiors."
+      },
+      {
+        "@type": "Service",
+        "name": "Residential Interior Design",
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "WNF Design Studio"
+        },
+        "description": "Luxury home, bungalow and flat interior layouts."
+      },
+      {
+        "@type": "Service",
+        "name": "Renovation & Restoration",
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "WNF Design Studio"
+        },
+        "description": "Remodeling & restoring modern or heritage spaces."
+      }
+    ]
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}
+    />
+  );
+}
+
 export default function Page() {
   return (
     <PageIntroWrapper type="services">
+      <SchemaMarkup />
       <div className="bg-[#F9F8F6] text-stone-900 min-h-screen font-sans selection:bg-stone-200 selection:text-stone-900">
 
         {/* 1. HERO SECTION */}

@@ -1,9 +1,25 @@
 export const metadata = {
   title: "Interior Design & Architecture Services in Rajkot | WNF Design Studio",
   description:
-    "WNF Design Studio offers Architecture, Interior Design, Residential Design, Commercial Design, Renovation, and Project Management services in Rajkot, Gujarat. Get a free consultation today!",
+    "Professional architecture, residential and commercial interior design, structural engineering, renovation, and end-to-end project management services in Rajkot, Gujarat.",
   alternates: {
     canonical: "https://wnfdesignstudio.com/services",
+  },
+  openGraph: {
+    title: "Interior Design & Architecture Services in Rajkot | WNF Design Studio",
+    description:
+      "Professional architecture, residential and commercial interior design, structural engineering, renovation, and end-to-end project management services in Rajkot, Gujarat.",
+    url: "https://wnfdesignstudio.com/services",
+    type: "website",
+    locale: "en_IN",
+    images: ["/assets/og/services-banner.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Interior Design & Architecture Services in Rajkot | WNF Design Studio",
+    description:
+      "Professional architecture, residential and commercial interior design, structural engineering, renovation, and end-to-end project management services in Rajkot, Gujarat.",
+    images: ["/assets/og/services-banner.jpg"],
   },
 };
 

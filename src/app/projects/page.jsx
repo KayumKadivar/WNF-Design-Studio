@@ -7,6 +7,28 @@ import PageIntroWrapper from "@/components/shared/PageIntroWrapper";
 
 const categories = ["All", "Architecture", "Interior", "Exhibition Stall"];
 
+function SchemaMarkup() {
+  const projectsSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://wnfdesignstudio.com/projects/#webpage",
+    "url": "https://wnfdesignstudio.com/projects",
+    "name": "WNF Design Studio Portfolio | Architecture & Interior Design in Rajkot",
+    "description": "Explore 18+ completed residential architecture, luxury commercial workspace interior design, and structural exhibition stall projects in Rajkot and Gujarat.",
+    "about": {
+      "@type": "LocalBusiness",
+      "name": "WNF Design Studio"
+    }
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsSchema) }}
+    />
+  );
+}
+
 export default function Page() {
   const [activeCategory, setActiveCategory] = useState("All");
   const categoriesToDisplay = activeCategory === "All"
@@ -15,6 +37,7 @@ export default function Page() {
 
   return (
     <PageIntroWrapper type="projects">
+      <SchemaMarkup />
       <div className="bg-[#F9F8F6] text-stone-900 min-h-screen font-sans selection:bg-stone-200 selection:text-stone-900">
 
         {/* HEADER & FILTERS */}
@@ -150,7 +173,7 @@ export default function Page() {
                                     transition={{ duration: 0.4, delay: 0.3 }}
                                     className="text-white text-[14px] font-mono uppercase font-semibold tracking-[0.2em]"
                                   >
-                                    Click to Open
+                                    {project.location || "Rajkot / Gujarat"}
                                   </motion.span>
                                 </motion.div>
                             </motion.div>

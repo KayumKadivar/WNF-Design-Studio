@@ -2,9 +2,52 @@
 import { motion } from "framer-motion";
 import PageIntroWrapper from "@/components/shared/PageIntroWrapper";
 
+function SchemaMarkup() {
+  const aboutSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "@id": "https://wnfdesignstudio.com/about/#webpage",
+        "url": "https://wnfdesignstudio.com/about",
+        "name": "About WNF Design Studio | Leading Architecture Firm in Rajkot",
+        "description": "Learn about WNF Design Studio – Rajkot's leading interior design & architecture firm.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://wnfdesignstudio.com/#website",
+          "url": "https://wnfdesignstudio.com",
+          "name": "WNF Design Studio"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://wnfdesignstudio.com/#organization",
+        "name": "WNF Design Studio",
+        "url": "https://wnfdesignstudio.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wnfdesignstudio.com/assets/logo/headerlogo.png"
+        },
+        "founder": {
+          "@type": "Person",
+          "name": "Makbul Kadivar"
+        }
+      }
+    ]
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}
+    />
+  );
+}
+
 export default function Page() {
   return (
     <PageIntroWrapper type="about">
+      <SchemaMarkup />
       <div className="bg-[#F9F8F6] text-stone-900 min-h-screen font-sans selection:bg-stone-200 selection:text-stone-900">
 
         {/* 1. HERO SECTION (Inlined to guarantee theme) */}
@@ -61,19 +104,17 @@ export default function Page() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="lg:col-span-8 lg:pl-10 px-4"
               >
-                <span className="text-[14px] font-mono uppercase tracking-widest text-stone-500 mb-6 block font-medium">
-                  // Our Philosophy
-                </span>
+           
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-stone-900 leading-[1.1] mb-8 tracking-tight">
                   Design That Transcends Time
                 </h2>
 
                 <div className="space-y-6 text-lg text-stone-600 font-light leading-relaxed">
                   <p>
-                    At WNF Studio, we believe that great design has the power to transform not just spaces, but the way people live, work, and experience the world around them.
+                    At WNF Design Studio, we believe that great design has the power to transform not just spaces, but the way people live, work, and experience the world around them.
                   </p>
                   <p>
-                    Our approach combines deep respect for architectural heritage with bold innovation, creating environments that are both timeless and distinctly contemporary.
+                    Our approach combines deep respect for our clients with bold innovation, creating environments that are timeless and distinctly contemporary.
                   </p>
                   <p>
                     Every project is a unique journey, guided by our commitment to sustainability, functionality, and aesthetic excellence.

@@ -5,29 +5,82 @@ import { MapPin, Mail, Phone, Loader2, ArrowRight } from "lucide-react";
 import PageIntroWrapper from "@/components/shared/PageIntroWrapper";
 
 export default function Page() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: ""
+  });
+  const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState(null);
   const formRef = useRef(null);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
+  const validateForm = () => {
+    let tempErrors = {};
+    if (!formData.name.trim()) {
+      tempErrors.name = "Name is required";
+    }
+    if (!formData.email.trim()) {
+      tempErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      tempErrors.email = "Please enter a valid email address";
+    }
+    if (!formData.phone.trim()) {
+      tempErrors.phone = "Phone number is required";
+    } else if (!/^\+?[0-9\s\-()]{10,15}$/.test(formData.phone.trim())) {
+      tempErrors.phone = "Please enter a valid phone number (10 to 15 digits)";
+    }
+    if (!formData.message.trim()) {
+      tempErrors.message = "Message is required";
+    }
+    setErrors(tempErrors);
+    return Object.keys(tempErrors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
     setIsSubmitting(true);
     setStatus(null);
     try {
-      const formData = new FormData(e.target);
-      formData.append("access_key", "3e943bff-82be-4946-ad81-b8157b5c5b1a");
-      formData.append("subject", "WNF Design Studio Contact Form");
-      formData.append("from_name", "WNF Design Studio Website");
-
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          access_key: "3e943bff-82be-4946-ad81-b8157b5c5b1a",
+          subject: "WNF Design Studio Contact Form",
+          from_name: "WNF Design Studio Website",
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message
+        })
       });
 
       const data = await response.json();
       if (data.success) {
         setStatus("success");
-        formRef.current.reset();
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: ""
+        });
+        setErrors({});
       } else {
         setStatus("error");
       }
@@ -39,8 +92,41 @@ export default function Page() {
     }
   };
 
+function SchemaMarkup() {
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "@id": "https://wnfdesignstudio.com/contact/#webpage",
+    "url": "https://wnfdesignstudio.com/contact",
+    "name": "Contact WNF Design Studio | Best Interior Designer in Rajkot",
+    "description": "Get in touch with WNF Design Studio – the best interior designer in Rajkot.",
+    "mainEntity": {
+      "@type": "LocalBusiness",
+      "name": "WNF Design Studio",
+      "telephone": "+918530070800",
+      "email": "info@wnfdesignstudio.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Wings Business Bay, 150 Feet Ring Road",
+        "addressLocality": "Rajkot",
+        "addressRegion": "Gujarat",
+        "postalCode": "360004",
+        "addressCountry": "IN"
+      }
+    }
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
+    />
+  );
+}
+
   return (
     <PageIntroWrapper type="contact">
+      <SchemaMarkup />
       <div className="bg-[#F9F8F6] text-stone-900 min-h-screen font-sans selection:bg-stone-200 selection:text-stone-900">
 
         {/* 1. HERO SECTION */}
@@ -86,57 +172,123 @@ export default function Page() {
               >
                 <div className="bg-white p-8 md:p-12 border border-stone-200 shadow-sm h-full">
                   <h2 className="text-3xl font-light text-stone-900 mb-8 border-b border-stone-200 pb-4">
-                    Send a Message
+                    Send Us a Message
                   </h2>
 
-                  {/* Architectural Status Messages */}
-                  {status === "success" && (
-                    <div className="mb-8 p-4 bg-stone-50 border border-stone-200 text-stone-800 text-sm font-light flex items-center gap-3">
-                      <span className="w-1.5 h-1.5 bg-green-500"></span>
-                      Message sent successfully. We will be in touch shortly.
-                    </div>
-                  )}
-                  {status === "error" && (
-                    <div className="mb-8 p-4 bg-stone-50 border border-stone-200 text-stone-800 text-sm font-light flex items-center gap-3">
-                      <span className="w-1.5 h-1.5 bg-red-500"></span>
-                      Failed to send. Please email us directly at info@wnfdesignstudio.com.
-                    </div>
-                  )}
-
-                  <form ref={formRef} id="contact-form" onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <label htmlFor="name" className="text-[14px] font-mono uppercase tracking-widest text-stone-500">Name</label>
-                        <input id="name" name="name" placeholder="John Doe" className="w-full h-12 px-4 bg-[#F9F8F6] border border-stone-200 rounded-none focus:outline-none focus:border-stone-900 transition-colors disabled:opacity-50 text-stone-900 font-light" required disabled={isSubmitting} />
-                      </div>
-                      <div className="space-y-2">
-                        <label htmlFor="email" className="text-[14px] font-mono uppercase tracking-widest text-stone-500">Email</label>
-                        <input id="email" name="email" type="email" placeholder="john@example.com" className="w-full h-12 px-4 bg-[#F9F8F6] border border-stone-200 rounded-none focus:outline-none focus:border-stone-900 transition-colors disabled:opacity-50 text-stone-900 font-light" required disabled={isSubmitting} />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label htmlFor="phone" className="text-[14px] font-mono uppercase tracking-widest text-stone-500">Phone</label>
-                      <input id="phone" name="phone" placeholder="+91 00000 00000" className="w-full h-12 px-4 bg-[#F9F8F6] border border-stone-200 rounded-none focus:outline-none focus:border-stone-900 transition-colors disabled:opacity-50 text-stone-900 font-light" disabled={isSubmitting} />
-                    </div>
-
-                    <div className="space-y-2">
-                      <label htmlFor="message" className="text-[14px] font-mono uppercase tracking-widest text-stone-500">Message</label>
-                      <textarea id="message" name="message" placeholder="Tell us about your project..." className="w-full min-h-[160px] p-4 bg-[#F9F8F6] border border-stone-200 rounded-none focus:outline-none focus:border-stone-900 transition-colors disabled:opacity-50 text-stone-900 font-light resize-none" required disabled={isSubmitting} />
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full md:w-auto mt-4 inline-flex items-center justify-center gap-3 bg-stone-900 text-white px-10 py-4 text-[14px] font-mono uppercase tracking-widest hover:bg-stone-800 transition-colors disabled:opacity-70 group rounded-none"
+                  {/* Architectural Status Messages & Form */}
+                  {status === "success" ? (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.98 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="flex flex-col items-center justify-center text-center py-16 px-6 bg-stone-50 border border-stone-200"
                     >
-                      {isSubmitting ? (
-                        <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...</>
-                      ) : (
-                        <>Send Message <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></>
+                      <div className="w-16 h-16 bg-stone-900 text-white rounded-full flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                        </svg>
+                      </div>
+                      <h3 className="text-3xl font-light text-stone-900 mb-4">Message Sent</h3>
+                      <p className="text-stone-600 font-light max-w-md leading-relaxed mb-8">
+                        Thank you for reaching out. Your inquiry has been successfully transmitted. Our design team will review your project and get back to you within 24 hours.
+                      </p>
+                      <button
+                        onClick={() => setStatus(null)}
+                        className="inline-flex items-center gap-2 bg-stone-900 text-white px-8 py-3.5 text-[14px] font-mono uppercase tracking-widest hover:bg-stone-800 transition-colors"
+                      >
+                        Send Another Message
+                      </button>
+                    </motion.div>
+                  ) : (
+                    <>
+                      {status === "error" && (
+                        <div className="mb-8 p-4 bg-stone-50 border border-stone-200 text-stone-800 text-sm font-light flex items-center gap-3">
+                          <span className="w-1.5 h-1.5 bg-red-500"></span>
+                          Failed to send. Please email us directly at info@wnfdesignstudio.com or call +91 8530070800.
+                        </div>
                       )}
-                    </button>
-                  </form>
+
+                      <form ref={formRef} id="contact-form" onSubmit={handleSubmit} className="space-y-6" noValidate>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="space-y-2">
+                            <label htmlFor="name" className="text-[14px] font-mono uppercase tracking-widest text-stone-500 font-medium">Name</label>
+                            <input
+                              id="name"
+                              name="name"
+                              value={formData.name}
+                              onChange={handleChange}
+                              placeholder="John Doe"
+                              className={`w-full h-12 px-4 bg-[#F9F8F6] border rounded-none focus:outline-none transition-colors disabled:opacity-50 text-stone-900 font-light ${errors.name ? 'border-red-500 focus:border-red-500' : 'border-stone-200 focus:border-stone-900'}`}
+                              disabled={isSubmitting}
+                            />
+                            {errors.name && (
+                              <p className="text-red-500 text-xs font-mono mt-1">{errors.name}</p>
+                            )}
+                          </div>
+                          <div className="space-y-2">
+                            <label htmlFor="email" className="text-[14px] font-mono uppercase tracking-widest text-stone-500 font-medium">Email</label>
+                            <input
+                              id="email"
+                              name="email"
+                              type="email"
+                              value={formData.email}
+                              onChange={handleChange}
+                              placeholder="john@example.com"
+                              className={`w-full h-12 px-4 bg-[#F9F8F6] border rounded-none focus:outline-none transition-colors disabled:opacity-50 text-stone-900 font-light ${errors.email ? 'border-red-500 focus:border-red-500' : 'border-stone-200 focus:border-stone-900'}`}
+                              disabled={isSubmitting}
+                            />
+                            {errors.email && (
+                              <p className="text-red-500 text-xs font-mono mt-1">{errors.email}</p>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="space-y-2">
+                          <label htmlFor="phone" className="text-[14px] font-mono uppercase tracking-widest text-stone-500 font-medium">Phone</label>
+                          <input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            placeholder="+91 00000 00000"
+                            className={`w-full h-12 px-4 bg-[#F9F8F6] border rounded-none focus:outline-none transition-colors disabled:opacity-50 text-stone-900 font-light ${errors.phone ? 'border-red-500 focus:border-red-500' : 'border-stone-200 focus:border-stone-900'}`}
+                            disabled={isSubmitting}
+                          />
+                          {errors.phone && (
+                            <p className="text-red-500 text-xs font-mono mt-1">{errors.phone}</p>
+                          )}
+                        </div>
+
+                        <div className="space-y-2">
+                          <label htmlFor="message" className="text-[14px] font-mono uppercase tracking-widest text-stone-500 font-medium">Message</label>
+                          <textarea
+                            id="message"
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
+                            placeholder="Tell us about your project..."
+                            className={`w-full min-h-[160px] p-4 bg-[#F9F8F6] border rounded-none focus:outline-none transition-colors disabled:opacity-50 text-stone-900 font-light resize-none ${errors.message ? 'border-red-500 focus:border-red-500' : 'border-stone-200 focus:border-stone-900'}`}
+                            disabled={isSubmitting}
+                          />
+                          {errors.message && (
+                            <p className="text-red-500 text-xs font-mono mt-1">{errors.message}</p>
+                          )}
+                        </div>
+
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="w-full md:w-auto mt-4 inline-flex items-center justify-center gap-3 bg-stone-900 text-white px-10 py-4 text-[14px] font-mono uppercase tracking-widest hover:bg-stone-800 transition-colors disabled:opacity-70 group rounded-none"
+                        >
+                          {isSubmitting ? (
+                            <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...</>
+                          ) : (
+                            <>Send Message <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></>
+                          )}
+                        </button>
+                      </form>
+                    </>
+                  )}
                 </div>
               </motion.div>
 
@@ -200,7 +352,7 @@ export default function Page() {
                       width="100%" height="100%" style={{ border: 0 }}
                       allowFullScreen loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
-                      title="Studio WnF Location"
+                      title="WNF Design Studio Location"
                       className="w-full h-full grayscale hover:grayscale-0 transition-all duration-700 object-cover"
                     />
                   </div>

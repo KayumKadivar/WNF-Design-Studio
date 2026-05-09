@@ -33,7 +33,7 @@ const CTASection = () => (
             </span>
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-light leading-[1.1] max-w-3xl mx-auto mb-8 tracking-tight">
-              Ready to Transform Your Space?
+              Transform Your Space – Book a Free Consultation Today
             </h2>
 
             <p className="text-lg text-stone-400 font-light leading-relaxed max-w-2xl mx-auto mb-12">

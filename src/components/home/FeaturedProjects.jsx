@@ -64,7 +64,7 @@ const FeaturedProjects = () => (
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 border-b border-stone-200 pb-8">
         <div className="max-w-3xl">
           <h2 className="display-title-responsive text-stone-900">
-            Our Projects
+            Our Projects – Residential, Commercial & Exhibition Stalls
           </h2>
         </div>
       </div>

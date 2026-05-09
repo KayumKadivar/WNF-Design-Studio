@@ -224,7 +224,7 @@ export const projects = [
   },
   {
     id: 14,
-    title: "Studio WnF Office",
+    title: "WNF Design Studio Office",
     category: "Interior",
     location: "Rajkot, Gujarat",
     year: "2024",
@@ -476,7 +476,7 @@ export const projects = [
     features: ["Bold crowd circulation structures", "Dramatic display lighting", "High-visibility brand integration", "Rapid-deployment structural systems"],
   },
   {
-    id: 16,
+    id: 19,
     title: "Exhibition Stall – Render Series",
     category: "Exhibition Stall",
     location: "Gujarat",
@@ -499,7 +499,7 @@ export const projects = [
     features: ["Photorealistic 3D renders", "Multiple viewpoint studies", "Material and lighting visualization", "Pre-construction design validation"],
   },
   {
-    id: 17,
+    id: 20,
     title: "Exhibition Stall – 3D Views",
     category: "Exhibition Stall",
     location: "Gujarat",

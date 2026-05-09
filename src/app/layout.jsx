@@ -52,7 +52,7 @@ export const metadata = {
     "luxury interior design Rajkot",
     "bungalow design Rajkot",
     "commercial interior design Rajkot Gujarat",
-    "WNF Studio Rajkot",
+    "WNF Design Studio Rajkot",
     "interior decoration Rajkot",
     "3D interior design Rajkot",
     "renovation services Rajkot",
@@ -73,7 +73,7 @@ export const metadata = {
       "Award-winning architecture & interior design studio based in Rajkot, Gujarat. Residential, commercial & renovation projects across Gujarat.",
     images: [
       {
-        url: "/assets/logo/animatedlogo.png",
+        url: "/assets/heroslider/interior.png",
         width: 1200,
         height: 630,
         alt: "WNF Design Studio – Interior Designer Rajkot",
@@ -86,8 +86,8 @@ export const metadata = {
     card: "summary_large_image",
     title: "Best Interior Designer in Rajkot | WNF Design Studio",
     description:
-      "Luxury architecture & interior design in Rajkot, Gujarat. Contact WNF Design Studio today.",
-    images: ["/assets/logo/animatedlogo.png"],
+      "Rajkot top-rated architecture & interior design studio. Luxury homes, bungalows, offices & commercial spaces. Free consultation available.",
+    images: ["/assets/heroslider/interior.png"],
   },
 
   // ✅ Canonical URL
@@ -127,7 +127,7 @@ export default function RootLayout({ children }) {
 
       <body suppressHydrationWarning>
         {/* Accessibility: Skip to main content for keyboard users */}
-        <Link 
+        <Link
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-white focus:text-stone-900 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:shadow-lg focus:rounded"
         >

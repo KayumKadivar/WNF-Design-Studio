@@ -1,9 +1,25 @@
 export const metadata = {
-  title: "Our Projects – Residential & Commercial Designs | WNF Design Studio Rajkot",
+  title: "Interior Design & Architecture Portfolio | WNF Design Studio",
   description:
-    "Explore WNF Design Studio's portfolio of residential homes, commercial offices, bungalows, and exhibition stalls designed in Rajkot and across Gujarat. See our work!",
+    "Explore 18+ completed residential architecture, luxury commercial workspace interior design, and structural exhibition stall projects in Rajkot and Gujarat.",
   alternates: {
     canonical: "https://wnfdesignstudio.com/projects",
+  },
+  openGraph: {
+    title: "Interior Design & Architecture Portfolio | WNF Design Studio",
+    description:
+      "Explore 18+ completed residential architecture, luxury commercial workspace interior design, and structural exhibition stall projects in Rajkot and Gujarat.",
+    url: "https://wnfdesignstudio.com/projects",
+    type: "website",
+    locale: "en_IN",
+    images: ["/assets/og/projects-banner.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Interior Design & Architecture Portfolio | WNF Design Studio",
+    description:
+      "Explore 18+ completed residential architecture, luxury commercial workspace interior design, and structural exhibition stall projects in Rajkot and Gujarat.",
+    images: ["/assets/og/projects-banner.jpg"],
   },
 };
 

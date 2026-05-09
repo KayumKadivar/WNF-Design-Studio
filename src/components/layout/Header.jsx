@@ -75,7 +75,7 @@ const Header = () => {
             <Link href="/" className={`font-display text-2xl lg:text-3xl tracking-tight flex items-center`}>
               <Image
                 src="/assets/logo/headerlogo.png"
-                alt="Studio WnF"
+                alt="WNF Design Studio"
                 width={140}
                 height={56}
                 className={`h-16 w-auto object-contain transition-all duration-300 ${logoClass}`}
@@ -92,8 +92,8 @@ const Header = () => {
                     href={link.path}
                     onClick={scrollToTop}
                     className={`text-md uppercase tracking-[0.15em] font-semibold link-underline transition-colors duration-300 ${textColor} ${pathname === link.path || (link.path !== "/" && pathname.startsWith(link.path))
-                        ? "opacity-100 link-active"
-                        : "opacity-70 hover:opacity-100"
+                      ? "opacity-100 link-active"
+                      : "opacity-70 hover:opacity-100"
                       }`}
                   >
                     {link.name}
@@ -148,8 +148,8 @@ const Header = () => {
                     href={link.path}
                     onClick={scrollToTop}
                     className={`text-3xl font-display ${pathname === link.path || (link.path !== "/" && pathname.startsWith(link.path))
-                        ? "text-primary"
-                        : "text-foreground hover:text-primary"
+                      ? "text-primary"
+                      : "text-foreground hover:text-primary"
                       }`}
                   >
                     {link.name}
